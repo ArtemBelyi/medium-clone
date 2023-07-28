@@ -7,37 +7,30 @@
           <a routerLink="/login">Have an account?</a>
         </p>
         Backend errors are here
-        <form [formGroup]='userProfileForm' (submit)='updateUserProfile()'>
+        <form [formGroup]="userProfileForm" (submit)="updateUserProfile()">
           <fieldset>
-            <fieldset class='form-group'>
+            <fieldset class="form-group">
               <input
                 type="text"
                 class="form-control form-control-lg"
                 placeholder="Username"
-                formControlName='username'
+                formControlName="username"
               />
             </fieldset>
 
-            <fieldset class='form-group'>
-              <input
-                type="text"
-                class="form-control form-control-lg"
-                placeholder="Email"
-                formControlName='email'
-              />
+            <fieldset class="form-group">
+              <input type="text" class="form-control form-control-lg" placeholder="Email" formControlName="email" />
             </fieldset>
 
-            <fieldset class='form-group'>
+            <fieldset class="form-group">
               <input
                 type="Password"
                 class="form-control form-control-lg"
                 placeholder="Password"
-                formControlName='password'
+                formControlName="password"
               />
             </fieldset>
-            <button class='btn btn-lg btn-primary pull-xs-right' type='submit'>
-              Sign Up
-            </button>
+            <button class="btn btn-lg btn-primary pull-xs-right" type="submit">Sign Up</button>
           </fieldset>
         </form>
       </div>
