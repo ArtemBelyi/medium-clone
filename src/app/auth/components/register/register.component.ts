@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { registerAction } from '../../store/actions/register.action';
 import { Observable } from 'rxjs';
+import { AuthService } from '../../services/auth.service';
 import { isSubmittingSelector } from '../../store/selectors';
 
 @Component({
@@ -17,6 +18,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private store: Store,
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -38,5 +40,6 @@ export class RegisterComponent implements OnInit {
 
   updateUserProfile(): void {
     this.store.dispatch(registerAction(this.userProfileForm.value));
+    this.authService.register(this.userProfileForm.value).subscribe();
   }
 }

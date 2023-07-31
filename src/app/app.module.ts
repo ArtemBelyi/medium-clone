@@ -7,7 +7,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AuthModule } from './auth/auth.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
-import { reducers } from './auth/store/reducers/reducers';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +16,7 @@ import { reducers } from './auth/store/reducers/reducers';
     AppRoutingModule,
     AuthModule,
     ReactiveFormsModule,
+    HttpClientModule,
     FormsModule,
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({
