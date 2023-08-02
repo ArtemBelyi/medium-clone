@@ -3,10 +3,13 @@
     <div class="row">
       <div class="col-md-6 offset-md-3 col-xs-12">
         <h1 class="text-xs-center">Sign Up</h1>
-        <p>
+        <p class="text-xs-center">
           <a routerLink="/login">Have an account?</a>
         </p>
-        Backend errors are here
+        <mc-backend-error-messages
+          *ngIf="backendErrors$ | async"
+          [backendErrors]="backendErrors$ | async"
+        ></mc-backend-error-messages>
         <form [formGroup]="userProfileForm" (submit)="updateUserProfile()">
           <fieldset>
             <fieldset class="form-group">

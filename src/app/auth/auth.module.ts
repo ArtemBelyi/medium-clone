@@ -8,6 +8,7 @@ import { AuthService } from './services/auth.service';
 import { reducers } from './store/reducers/reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { RegisterEffect } from './store/effects/register.effect';
+import { BackendErrorMessagesModule } from '../shared/modules/backend-error-messages/backend-error-messages.module';
 
 @NgModule({
   declarations: [RegisterComponent],
@@ -15,6 +16,7 @@ import { RegisterEffect } from './store/effects/register.effect';
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
+    BackendErrorMessagesModule,
     StoreModule.forFeature('auth', reducers),
     EffectsModule.forFeature([RegisterEffect]),
   ],

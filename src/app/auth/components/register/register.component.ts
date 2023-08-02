@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { registerAction } from '../../store/actions/register.action';
 import { Observable } from 'rxjs';
-import { isSubmittingSelector } from '../../store/selectors';
+import { isSubmittingSelector, validationErrorsSelector } from '../../store/selectors';
+import { BackendErrors } from '../../../shared/types/backend-errors';
 import { RegisterRequestInterface } from '../../../shared/types/registerRequest.interface';
 
 @Component({
@@ -14,6 +15,7 @@ import { RegisterRequestInterface } from '../../../shared/types/registerRequest.
 export class RegisterComponent implements OnInit {
   userProfileForm!: FormGroup;
   isSubmitting$!: Observable<boolean>;
+  backendErrors$!: Observable<BackendErrors | null>;
 
   constructor(
     private fb: FormBuilder,
@@ -35,6 +37,7 @@ export class RegisterComponent implements OnInit {
 
   initializeValues(): void {
     this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
+    this.backendErrors$ = this.store.pipe(select(validationErrorsSelector));
   }
 
   updateUserProfile(): void {
