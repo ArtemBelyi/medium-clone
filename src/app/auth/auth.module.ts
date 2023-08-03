@@ -8,6 +8,7 @@ import { AuthService } from './services/auth.service';
 import { reducers } from './store/reducers/reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { RegisterEffect } from './store/effects/register.effect';
+import { LocalStorageInfoService } from '../shared/services/local-storage-info.service';
 import { BackendErrorMessagesModule } from '../shared/modules/backend-error-messages/backend-error-messages.module';
 
 @NgModule({
@@ -20,6 +21,6 @@ import { BackendErrorMessagesModule } from '../shared/modules/backend-error-mess
     StoreModule.forFeature('auth', reducers),
     EffectsModule.forFeature([RegisterEffect]),
   ],
-  providers: [AuthService],
+  providers: [AuthService, LocalStorageInfoService],
 })
 export class AuthModule {}
