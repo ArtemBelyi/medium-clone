@@ -2,6 +2,7 @@ import { RegisterRequestInterface } from '../../shared/types/registerRequest.int
 import { AuthResponseInterface } from '../../shared/types/authResponse.interface';
 import { CurrentUserInterface } from '../../shared/types/currentUser.interface';
 import { environments } from '../../../environments/environments';
+import { LoginRequest } from '../../shared/types/loginRequest';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
@@ -12,8 +13,17 @@ import { map, Observable } from 'rxjs';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  register(user: RegisterRequestInterface): Observable<CurrentUserInterface> {
+  getUser(res: AuthResponseInterface): CurrentUserInterface {
+    return res.user;
+  }
+
+  register(newUser: RegisterRequestInterface): Observable<CurrentUserInterface> {
     const apiUsers = `${environments.apiURL}/users`;
-    return this.http.post<AuthResponseInterface>(apiUsers, user).pipe(map((response) => response.user));
+    return this.http.post<AuthResponseInterface>(apiUsers, newUser).pipe(map(this.getUser));
+  }
+
+  login(user: LoginRequest): Observable<CurrentUserInterface> {
+    const apiUsers = `${environments.apiURL}/users/login`;
+    return this.http.post<AuthResponseInterface>(apiUsers, user).pipe(map(this.getUser));
   }
 }
