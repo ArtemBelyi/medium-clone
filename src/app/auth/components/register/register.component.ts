@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
     this.backendErrors$ = this.store.pipe(select(validationErrorsSelector));
   }
 
-  updateUserProfile(): void {
+  createNewUser(): void {
     const request: RegisterRequestInterface = {
       user: this.userProfileForm.value,
     };

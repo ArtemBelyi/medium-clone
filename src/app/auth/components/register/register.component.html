@@ -10,7 +10,7 @@
           *ngIf="backendErrors$ | async"
           [backendErrors]="backendErrors$ | async"
         ></mc-backend-error-messages>
-        <form [formGroup]="userProfileForm" (submit)="updateUserProfile()">
+        <form [formGroup]="userProfileForm" (submit)="createNewUser()">
           <fieldset>
             <fieldset class="form-group">
               <input
