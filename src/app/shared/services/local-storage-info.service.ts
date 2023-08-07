@@ -7,7 +7,8 @@ export class LocalStorageInfoService {
   constructor() {}
 
   public get accessToken(): string {
-    return JSON.parse(localStorage.getItem('accessToken') || '');
+    const token = localStorage.getItem('accessToken');
+    return token ? JSON.parse(token) : '';
   }
 
   public set accessToken(token: string) {

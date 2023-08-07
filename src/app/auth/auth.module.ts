@@ -9,6 +9,7 @@ import { reducers } from './store/reducers/reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { LoginEffect } from './store/effects/login.effect';
 import { RegisterEffect } from './store/effects/register.effect';
+import { GetCurrentUserEffect } from './store/effects/getCurrentUser.effect';
 import { LocalStorageInfoService } from '../shared/services/local-storage-info.service';
 import { BackendErrorMessagesModule } from '../shared/modules/backend-error-messages/backend-error-messages.module';
 import { LoginComponent } from './components/login/login.component';
@@ -21,7 +22,7 @@ import { LoginComponent } from './components/login/login.component';
     ReactiveFormsModule,
     BackendErrorMessagesModule,
     StoreModule.forFeature('auth', reducers),
-    EffectsModule.forFeature([RegisterEffect, LoginEffect]),
+    EffectsModule.forFeature([RegisterEffect, LoginEffect, GetCurrentUserEffect]),
   ],
   providers: [AuthService, LocalStorageInfoService],
 })
