@@ -11,11 +11,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { CommonModule } from '@angular/common';
 import { TopBarModule } from './shared/modules/top-bar/tob-bar.module';
+import { GlobalFeedModule } from './globalFeed/global-feed.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     TopBarModule,
+    GlobalFeedModule,
     BrowserModule,
     AppRoutingModule,
     CommonModule,
