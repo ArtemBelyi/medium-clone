@@ -4,17 +4,13 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { map, catchError, exhaustMap } from 'rxjs/operators';
 import { FeedResponseInterface } from '../../../../types/feed-response.interface';
 import { FeedService } from '../../services/feed.service';
-import {
-  getFeedAction,
-  getFeedSuccessAction,
-  getFeedFailureAction
-} from '../actions/getFeed.action';
+import { getFeedAction, getFeedSuccessAction, getFeedFailureAction } from '../actions/getFeed.action';
 
 @Injectable()
 export class GetFeedEffect {
   constructor(
     private actions$: Actions,
-    private feedService: FeedService
+    private feedService: FeedService,
   ) {}
 
   getFeed$ = createEffect(() =>

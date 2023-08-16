@@ -5,8 +5,8 @@ import { getFeedAction, getFeedSuccessAction, getFeedFailureAction } from '../ac
 const initialState: FeedStateInterface = {
   isLoading: false,
   error: null,
-  data: null
-}
+  data: null,
+};
 
 const feedReducer = createReducer(
   initialState,
@@ -14,8 +14,8 @@ const feedReducer = createReducer(
     getFeedAction,
     (state): FeedStateInterface => ({
       ...state,
-      isLoading: true
-    })
+      isLoading: true,
+    }),
   ),
 
   on(
@@ -23,18 +23,18 @@ const feedReducer = createReducer(
     (state, action): FeedStateInterface => ({
       ...state,
       data: action.feed,
-      isLoading: false
-    })
+      isLoading: false,
+    }),
   ),
 
   on(
     getFeedFailureAction,
     (state): FeedStateInterface => ({
       ...state,
-      isLoading: false
-    })
-  )
-)
+      isLoading: false,
+    }),
+  ),
+);
 
 export function reducers(state: FeedStateInterface, action: Action) {
   return feedReducer(state, action);

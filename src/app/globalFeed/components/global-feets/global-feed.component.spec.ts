@@ -8,7 +8,7 @@ describe('GlobalFeetsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [GlobalFeedComponent]
+      declarations: [GlobalFeedComponent],
     });
     fixture = TestBed.createComponent(GlobalFeedComponent);
     component = fixture.componentInstance;

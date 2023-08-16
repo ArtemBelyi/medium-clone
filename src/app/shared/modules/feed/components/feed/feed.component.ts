@@ -9,28 +9,27 @@ import { ArticleInterface } from '../../../../types/article.interface';
 @Component({
   selector: 'mc-feed',
   templateUrl: './feed.component.html',
-  styleUrls: ['./feed.component.scss']
+  styleUrls: ['./feed.component.scss'],
 })
-export class FeedComponent implements OnInit{
-  @Input('apiUrl') apiUrlProps!: string
+export class FeedComponent implements OnInit {
+  @Input('apiUrl') apiUrlProps!: string;
 
-  isLoading!: boolean
-  error!: string | null
-  feed: FeedResponseInterface | null
+  isLoading!: boolean;
+  error!: string | null;
+  feed: FeedResponseInterface | null;
 
-  constructor(private store: Store) {
-  }
+  constructor(private store: Store) {}
 
   ngOnInit() {
-    this.fetchData()
-    this.initializeValues()
+    this.fetchData();
+    this.initializeValues();
   }
 
   private initializeValues(): void {
     combineLatest([
       this.store.pipe(select(isLoadingSelector)),
       this.store.pipe(select(errorSelector)),
-      this.store.pipe(select(dataFeedSelector))
+      this.store.pipe(select(dataFeedSelector)),
     ]).subscribe(([isLoading, error, feed]) => {
       this.isLoading = isLoading;
       this.error = error;
@@ -39,6 +38,6 @@ export class FeedComponent implements OnInit{
   }
 
   private fetchData(): void {
-    this.store.dispatch(getFeedAction({ url: this.apiUrlProps }))
+    this.store.dispatch(getFeedAction({ url: this.apiUrlProps }));
   }
 }

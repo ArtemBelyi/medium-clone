@@ -5,15 +5,14 @@ import { environments } from '../../../../../environments/environments';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FeedService {
-
   constructor(private http: HttpClient) {}
 
   getFeed(url: string): Observable<FeedResponseInterface> {
-    const fullUrl = `${environments.apiURL}${url}`
+    const fullUrl = `${environments.apiURL}${url}`;
 
-    return this.http.get<FeedResponseInterface>(fullUrl)
+    return this.http.get<FeedResponseInterface>(fullUrl);
   }
 }
