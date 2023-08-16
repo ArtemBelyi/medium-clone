@@ -22,5 +22,9 @@
       <p>{{ article['description'] }}</p>
     </a>
   </div>
-  PAGINATION
+  <mc-pagination
+    [totalCount]="feed.articlesCount"
+    [limit]='limit'
+    [currentPage]="urlTree.queryParams['page']"
+  ></mc-pagination>
 </div>
