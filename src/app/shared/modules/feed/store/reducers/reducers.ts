@@ -1,6 +1,7 @@
 import { FeedStateInterface } from '../../../../types/feedState.interface';
 import { Action, createReducer, on } from '@ngrx/store';
 import { getFeedAction, getFeedSuccessAction, getFeedFailureAction } from '../actions/getFeed.action';
+import { routerNavigatedAction } from '@ngrx/router-store';
 
 const initialState: FeedStateInterface = {
   isLoading: false,
@@ -32,6 +33,15 @@ const feedReducer = createReducer(
     (state): FeedStateInterface => ({
       ...state,
       isLoading: false,
+    }),
+  ),
+
+  on(
+    routerNavigatedAction,
+    (): FeedStateInterface => ({
+      isLoading: true,
+      error: null,
+      data: null,
     }),
   ),
 );

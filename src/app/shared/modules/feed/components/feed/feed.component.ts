@@ -4,8 +4,9 @@ import { getFeedAction } from '../../store/actions/getFeed.action';
 import { isLoadingSelector, dataFeedSelector, errorSelector } from '../../store/selectors';
 import { environments } from '../../../../../../environments/environments';
 import { FeedResponseInterface } from '../../../../types/feed-response.interface';
-import { combineLatest, Subject, takeUntil } from 'rxjs';
-import { Router, UrlTree } from '@angular/router';
+import { combineLatest, Subject, Subscription, takeUntil } from 'rxjs';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import queryString, { ParsedUrl } from 'query-string';
 
 const limitCount = environments.limit
 
@@ -23,25 +24,25 @@ export class FeedComponent implements OnInit, OnDestroy {
   error!: string | null;
   feed: FeedResponseInterface | null;
   limit = limitCount
-  urlTree: UrlTree
+  currentPage: number
   destroyed = new Subject()
+  queryParamsSubscription: Subscription
 
-  constructor(private store: Store, private router: Router) {}
+  constructor(private store: Store, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.fetchData();
     this.initializeValues();
-    //console.log(this.router.parseUrl(this.router.url));
+    this.initializeListeners();
   }
 
   ngOnDestroy(): void {
     this.destroyed.next(this);
     this.destroyed.complete();
+    this.queryParamsSubscription.unsubscribe();
   }
 
   private initializeValues(): void {
     this.baseUrl = this.router.url.split('?')[0]
-    this.urlTree = this.router.parseUrl(this.router.url)
 
     combineLatest([
       this.store.pipe(select(isLoadingSelector)),
@@ -55,7 +56,25 @@ export class FeedComponent implements OnInit, OnDestroy {
     });
   }
 
-  private fetchData(): void {
-    this.store.dispatch(getFeedAction({ url: this.apiUrlProps }));
+  private initializeListeners(): void {
+    this.queryParamsSubscription = this.route.queryParams
+      .subscribe((params: Params) => {
+        this.currentPage = Number(params['page'])
+        this.fetchFeed();
+    })
+  }
+
+  private fetchFeed(): void {
+    const parseObj: ParsedUrl = queryString.parseUrl(this.apiUrlProps)
+    const offset = this.currentPage * this.limit - this.limit
+
+    const stringParams = queryString.stringify({
+      offset,
+      limit: this.limit,
+      ...parseObj.query
+    })
+
+    const apiUrlWithParams = `${parseObj.url}?${stringParams}`
+    this.store.dispatch(getFeedAction({ url: apiUrlWithParams }));
   }
 }

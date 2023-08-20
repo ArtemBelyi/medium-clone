@@ -12,6 +12,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { CommonModule } from '@angular/common';
 import { TopBarModule } from './shared/modules/top-bar/tob-bar.module';
 import { GlobalFeedModule } from './globalFeed/global-feed.module';
+import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +26,7 @@ import { GlobalFeedModule } from './globalFeed/global-feed.module';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({ router: routerReducer }),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
@@ -34,6 +35,7 @@ import { GlobalFeedModule } from './globalFeed/global-feed.module';
       trace: false,
       traceLimit: 75,
     }),
+    StoreRouterConnectingModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
