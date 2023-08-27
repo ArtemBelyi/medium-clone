@@ -5,9 +5,10 @@ import { FeedModule } from '../shared/modules/feed/feed.module';
 import { BannerModule } from '../shared/modules/banner/banner.module';
 import { ErrorMessageModule } from '../shared/modules/error-message/error-message.module';
 import { LoadingModule } from '../shared/modules/loading/loading.module';
+import { PopularTagsModule } from '../shared/modules/popular-tags/popular-tags.module';
 
 @NgModule({
   declarations: [GlobalFeedComponent],
-  imports: [CommonModule, FeedModule, BannerModule, ErrorMessageModule, LoadingModule],
+  imports: [CommonModule, FeedModule, BannerModule, ErrorMessageModule, LoadingModule, PopularTagsModule],
 })
 export class GlobalFeedModule {}
