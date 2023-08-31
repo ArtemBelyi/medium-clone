@@ -1,4 +1,5 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, OnChanges} from '@angular/core';
+import { SimpleChanges } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { getFeedAction } from '../../store/actions/getFeed.action';
 import { isLoadingSelector, dataFeedSelector, errorSelector } from '../../store/selectors';
@@ -16,7 +17,7 @@ const limitCount = environments.limit
   styleUrls: ['./feed.component.scss'],
 })
 
-export class FeedComponent implements OnInit, OnDestroy {
+export class FeedComponent implements OnInit, OnDestroy, OnChanges {
   @Input('apiUrl') apiUrlProps!: string;
 
   isLoading!: boolean;
@@ -33,6 +34,13 @@ export class FeedComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initializeValues();
     this.initializeListeners();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    const urlProps = changes["apiUrlProps"];
+    const isApiUrlChanged = !urlProps.firstChange && urlProps.currentValue !== urlProps.previousValue;
+
+    isApiUrlChanged && this.fetchFeed();
   }
 
   ngOnDestroy(): void {
