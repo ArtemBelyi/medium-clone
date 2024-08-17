@@ -15,6 +15,7 @@ import { LoadingModule } from './shared/modules/loading/loading.module';
 import { PopularTagsModule } from './shared/modules/popular-tags/popular-tags.module';
 import { TopBarModule } from './shared/modules/top-bar/tob-bar.module';
 import { GlobalFeedModule } from './globalFeed/global-feed.module';
+import { WebSocketService } from './shared/services/web-socket.service';
 import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 import { YourFeedModule } from './your-feed/your-feed.module';
 
@@ -45,7 +46,7 @@ import { YourFeedModule } from './your-feed/your-feed.module';
     }),
     StoreRouterConnectingModule.forRoot(),
   ],
-  providers: [],
+  providers: [WebSocketService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
